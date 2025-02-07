@@ -1,5 +1,6 @@
-package dev.ryan.movies;
+package dev.ryan.movies.repositories;
 
+import dev.ryan.movies.data.Movie;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

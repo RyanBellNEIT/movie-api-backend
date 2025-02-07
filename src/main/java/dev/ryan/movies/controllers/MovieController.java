@@ -1,5 +1,7 @@
-package dev.ryan.movies;
+package dev.ryan.movies.controllers;
 
+import dev.ryan.movies.data.Movie;
+import dev.ryan.movies.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

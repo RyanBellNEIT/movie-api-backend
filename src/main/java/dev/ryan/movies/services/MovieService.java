@@ -1,6 +1,7 @@
-package dev.ryan.movies;
+package dev.ryan.movies.services;
 
-import org.bson.types.ObjectId;
+import dev.ryan.movies.data.Movie;
+import dev.ryan.movies.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
