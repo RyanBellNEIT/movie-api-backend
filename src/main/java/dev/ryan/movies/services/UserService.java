@@ -27,8 +27,8 @@ public class UserService {
         return userRepository.findUserByUsername(username);
     }
 
-    public User createUser(String username, String password, Long birthDate){
-        User user = userRepository.insert(new User(username, password, birthDate));
+    public User createUser(String username, String password, String email, Long birthDate){
+        User user = userRepository.insert(new User(username, password, email, birthDate));
 
         return userRepository.save(user);
     }
