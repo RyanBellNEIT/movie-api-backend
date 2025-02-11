@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-    public User(String username, String password, String email, Long birthDate){
+    public User(String username, String password, String email, String birthDate){
         this.username = username;
         this.password = password;
         this.email = email;
@@ -29,7 +29,7 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private Long birthDate;
+    private String birthDate;
     @DocumentReference
     private List<Movie> favoriteMovies;
     @DocumentReference

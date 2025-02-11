@@ -35,6 +35,6 @@ public class UserController {
     public ResponseEntity<User> addUser(@RequestBody Map<String, Object> payload){
         return new ResponseEntity<>(userService.createUser(String.valueOf(payload.get("username")),
                 String.valueOf(payload.get("password")), String.valueOf(payload.get("email")),
-                Long.parseLong(payload.get("birthDate").toString())), HttpStatus.CREATED);
+                String.valueOf(payload.get("birthDate"))), HttpStatus.CREATED);
     }
 }
