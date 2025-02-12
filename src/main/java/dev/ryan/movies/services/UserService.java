@@ -23,8 +23,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> findUserByUsername(String username){
-        return userRepository.findUserByUsername(username);
+    public Optional<User> findUserByEmail(String email){
+        return userRepository.findUserByEmail(email);
     }
 
     public User createUser(String username, String password, String email, String birthDate){

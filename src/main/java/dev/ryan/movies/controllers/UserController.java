@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -26,9 +23,9 @@ public class UserController {
         return new ResponseEntity<List<User>>(userService.allUsers(), HttpStatus.OK);
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<Optional<User>> getUserByUsername(@PathVariable String username){
-        return new ResponseEntity<Optional<User>>(userService.findUserByUsername(username), HttpStatus.OK);
+    @GetMapping("/{email}")
+    public ResponseEntity<Optional<User>> getUserByEmail(@PathVariable String email){
+        return new ResponseEntity<Optional<User>>(userService.findUserByEmail(email), HttpStatus.OK);
     }
 
     @PostMapping()
