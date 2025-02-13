@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -17,18 +18,18 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-    public User(String username, String password, String email, String birthDate){
-        this.username = username;
-        this.password = password;
+    public User(String email, String password, String birthDate){
         this.email = email;
+        this.password = password;
         this.birthDate = birthDate;
+        this.favoriteMovies = Collections.emptyList();
+        this.postedReviews = Collections.emptyList();
     }
 
     @Id
     private ObjectId id;
-    private String username;
-    private String password;
     private String email;
+    private String password;
     private String birthDate;
     @DocumentReference
     private List<Movie> favoriteMovies;

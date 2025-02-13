@@ -30,8 +30,12 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<User> addUser(@RequestBody Map<String, Object> payload){
-        return new ResponseEntity<>(userService.createUser(String.valueOf(payload.get("username")),
-                String.valueOf(payload.get("password")), String.valueOf(payload.get("email")),
-                String.valueOf(payload.get("birthDate"))), HttpStatus.CREATED);
+        if(userService.findUserByEmail(String.valueOf(payload.get("email"))).isEmpty()){
+            return new ResponseEntity<>(userService.createUser(String.valueOf(payload.get("email")),
+                    String.valueOf(payload.get("password")),
+                    String.valueOf(payload.get("birthDate"))), HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 }
