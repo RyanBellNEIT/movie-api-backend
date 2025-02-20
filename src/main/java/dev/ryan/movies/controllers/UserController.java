@@ -46,7 +46,7 @@ public class UserController {
 
     //Login
     @PostMapping("/login")
-    public ResponseEntity<Optional<User>> loginUser(Map<String, String> payload){
+    public ResponseEntity<Optional<User>> loginUser(@RequestBody Map<String, String> payload){
         //User found
         Optional<User> user = userService.findUserByEmail(payload.get("email"));
         if(user.isPresent()){
