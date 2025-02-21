@@ -1,10 +1,13 @@
 package dev.ryan.movies.controllers;
 
 import dev.ryan.movies.data.User;
+import dev.ryan.movies.services.JWTService;
 import dev.ryan.movies.services.MovieService;
 import dev.ryan.movies.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,9 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JWTService jwtService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
@@ -51,7 +57,14 @@ public class UserController {
         Optional<User> user = userService.findUserByEmail(payload.get("email"));
         if(user.isPresent()) {
             if (passwordEncoder.matches(payload.get("password"), user.get().getPassword())) {
-                return new ResponseEntity<>(user, HttpStatus.OK);
+                String authToken = jwtService.generateToken(user.get().getEmail());
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+                headers.add("Authorization", "Bearer "+authToken);
+                headers.setAccessControlExposeHeaders(Arrays.asList("Authorization"));
+
+                return new ResponseEntity<>(user, headers, HttpStatus.OK);
             }
         }
 
