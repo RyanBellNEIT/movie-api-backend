@@ -49,14 +49,12 @@ public class UserController {
     public ResponseEntity<Optional<User>> loginUser(@RequestBody Map<String, String> payload){
         //User found
         Optional<User> user = userService.findUserByEmail(payload.get("email"));
-        if(user.isPresent()){
-            if (passwordEncoder.matches(payload.get("password"), user.get().getPassword())){
+        if(user.isPresent()) {
+            if (passwordEncoder.matches(payload.get("password"), user.get().getPassword())) {
                 return new ResponseEntity<>(user, HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }
