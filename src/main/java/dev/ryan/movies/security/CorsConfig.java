@@ -20,22 +20,6 @@ import java.util.List;
 public class CorsConfig {
 
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
-
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry
-                        .addMapping("/**")
-                        .allowedMethods(CorsConfiguration.ALL)
-                        .allowedHeaders(CorsConfiguration.ALL)
-                        .allowedOriginPatterns(CorsConfiguration.ALL)
-                        .exposedHeaders("Authorization");
-            }
-        };
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         //Find an alternative to disabling this later.
