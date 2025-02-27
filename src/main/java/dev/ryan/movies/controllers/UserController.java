@@ -39,7 +39,7 @@ public class UserController {
     }
 
     //Registering users.
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseEntity<User> addUser(@RequestBody Map<String, Object> payload){
         if(userService.findUserByEmail(String.valueOf(payload.get("email"))).isEmpty()){
             return new ResponseEntity<>(userService.createUser(String.valueOf(payload.get("email")),
