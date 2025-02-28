@@ -1,5 +1,6 @@
 package dev.ryan.movies.controllers;
 
+import dev.ryan.movies.data.Movie;
 import dev.ryan.movies.data.User;
 import dev.ryan.movies.services.JWTService;
 import dev.ryan.movies.services.MovieService;
@@ -36,6 +37,18 @@ public class UserController {
     @GetMapping("/{email}")
     public ResponseEntity<Optional<User>> getUserByEmail(@PathVariable String email){
         return new ResponseEntity<Optional<User>>(userService.findUserByEmail(email), HttpStatus.OK);
+    }
+
+    @GetMapping("/{email}/movies")
+    public ResponseEntity<Optional<List<String>>> getFavoriteMoviePostersFromUser(@PathVariable String email){
+
+        Optional<List<String>> result = userService.findFavoriteMoviePosters(email);
+
+        if(result.isPresent()){
+            return new ResponseEntity<Optional<List<String>>>(result, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     //Registering users.
